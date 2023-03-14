@@ -9,15 +9,15 @@ class FlyBehaviour:
 # Implementations of FlyBehaviour
 class FlyWithWings(FlyBehaviour):
     def fly(self):
-        print("Flying with wings")
+        print("I'm flying!!")
 
 class FlyNoWay(FlyBehaviour):
     def fly(self):
-        print("Unable to fly")
+        print("I can't fly")
 
 class FlyRocketPowered(FlyBehaviour):
     def fly(self):
-        print("Flying with rocket!")
+        print("I'm flying with a rocket!")
 
 
 class QuackBehaviour:
@@ -39,7 +39,7 @@ class Squeak(QuackBehaviour):
     
 class MuteQuack(QuackBehaviour):
     def quack(self):
-        print("<< silence >>")
+        print("<< Silence >>")
 
 
 class Duck:
@@ -62,7 +62,7 @@ class Duck:
         self._quack_behaviour.quack()
 
     def swim(self):
-        raise NotImplementedError
+        print("All ducks float, even decoys!")
 
 
 # Implementations of Duck
@@ -71,7 +71,7 @@ class MallardDuck(Duck):
     _quack_behaviour = Quack()
 
     def display(self):
-        print("Mallard Duck")
+        print("I'm a real Mallard duck")
 
 class RubberDuck(Duck):
     _fly_behaviour = FlyNoWay()
@@ -81,28 +81,23 @@ class RubberDuck(Duck):
         print("Rubber Duck")
 
 class ModelDuck(Duck):
-    _fly_behaviour = FlyRocketPowered()
-    _quack_behaviour = MuteQuack()
+    _fly_behaviour = FlyNoWay()
+    _quack_behaviour = Quack()
 
     def display(self):
-        print("Model Duck")
+        print("I'm a model duck")
+
+
+def MiniDuckSimulator():
+    mallard = MallardDuck()
+    mallard.perform_quack()
+    mallard.perform_fly()
+
+    model = ModelDuck()
+    model.perform_fly()
+    model.set_fly_behaviour(FlyRocketPowered())
+    model.perform_fly()
 
 
 if __name__ == "__main__":
-    # Instantiate ducks
-    mallard = MallardDuck()
-    rubber = RubberDuck()
-    model = ModelDuck()
-
-    # Perform Behaviours
-    mallard.perform_fly()
-    mallard.perform_quack()
-
-    rubber.perform_quack()
-    rubber.set_quack_behaviour(Quack())
-    rubber.perform_quack()
-    
-    model.perform_fly()
-    model.set_fly_behaviour(FlyNoWay())
-    model.perform_fly()
-
+    MiniDuckSimulator()
